@@ -22,3 +22,9 @@ Need to figure out how to handle composition policy which is based on type
 and also based on "applies to".  
 
 Can attempt to save objects in immutable folders-- should check for mutability before containment.
+
+NEed generic telemetry type??
+
+Document Telemetry Metadata. (what are values, what properties matter?)
+
+<!-- change type.cssclass to type.cssClass -->

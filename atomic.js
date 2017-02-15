@@ -12,32 +12,28 @@
 
   var exports = {};
 
-  var config = {
-    contentType: 'application/x-www-form-urlencoded'
-  };
-
-  var parse = function (req) {
-    var result;
-    try {
-      result = JSON.parse(req.responseText);
-    } catch (e) {
-      result = req.responseText;
+  var generateResponse = function (req) {
+    var response = {
+        data: req.responseText,
+        status: req.status,
+        request: req
+    };
+    if (req.getResponseHeader('Content-Type') === 'application/json') {
+        response.data = JSON.parse(response.data);
     }
-    return [result, req];
+    return response;
   };
 
   var xhr = function (type, url, data) {
       var promise = new Promise(function (resolve, reject) {
           var XHR = root.XMLHttpRequest || ActiveXObject;
           var request = new XHR('MSXML2.XMLHTTP.3.0');
-          request.withCredentials = true;
 
           request.open(type, url, true);
-          request.setRequestHeader('Content-type', config.contentType);
           request.onreadystatechange = function () {
             var req;
             if (request.readyState === 4) {
-              req = parse(request);
+              req = generateResponse(request);
               if (request.status >= 200 && request.status < 300) {
                   resolve(req);
               } else {
@@ -46,8 +42,7 @@
             }
           };
           request.send(data);
-
-      })
+      });
       return promise;
   };
 
@@ -65,10 +60,6 @@
 
   exports.delete = function (url) {
     return xhr('DELETE', url);
-  };
-
-  exports.setContentType = function(value) {
-    config.contentType = value;
   };
 
   return exports;
