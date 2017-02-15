@@ -1,0 +1,48 @@
+{
+    "name": "Example Spacecraft",
+    "identifier": "sc",
+    "measurements": [
+        {
+            "name": "Fuel",
+            "identifier": "prop.fuel",
+            "units": "kilograms",
+            "type": "float"
+        },
+        {
+            "name": "Thrusters",
+            "identifier": "prop.thrusters",
+            "units": "None",
+            "type": "string"
+        },
+        {
+            "name": "Received",
+            "identifier": "comms.recd",
+            "units": "bytes",
+            "type": "integer"
+        },
+        {
+            "name": "Sent",
+            "identifier": "comms.sent",
+            "units": "bytes",
+            "type": "integer"
+        },
+        {
+            "name": "Generator Temperature",
+            "identifier": "pwr.temp",
+            "units": "\u0080C",
+            "type": "float"
+        },
+        {
+            "name": "Generator Current",
+            "identifier": "pwr.c",
+            "units": "A",
+            "type": "float"
+        },
+        {
+            "name": "Generator Voltage",
+            "identifier": "pwr.v",
+            "units": "V",
+            "type": "float"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tutorial Time</title>
+    <script src="openmct/openmct.js"></script>
+</head>
+<body>
+    <script src="atomic.js"></script>
+    <script src="taxonomy.js"></script>
+    <script src="telemetry.js"></script>
+    <script>
+        openmct.setAssetPath('/openmct');
+        openmct.install(openmct.plugins.localStorage);
+        openmct.install(openmct.plugins.snow);
+        openmct.install(openmct.plugins.myItems);
+        openmct.install(TaxonomyPlugin);
+        openmct.start();
+    </script>
+</body>
+</html>
