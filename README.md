@@ -1,7 +1,7 @@
 
 
 First Priority:
-Taxonomy
+Taxonomy (what do we call this thing?  It's an object provider.  measurements are objects too!)
 
 Second Priority:
 Telemetry Providers
@@ -13,6 +13,10 @@ Fixing object API. (persistence spaces, etc.)
 
 Fourth Priority:
 What do we use to simplify AJAX for tutorial.
+
+End of tomorrow:
+* These things done, plus an outline of the tutorial.
+* Should be ready to complete this.
 
 # Bugs
 

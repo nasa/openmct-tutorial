@@ -14,6 +14,9 @@
         openmct.install(openmct.plugins.snow);
         openmct.install(openmct.plugins.myItems);
         openmct.install(TaxonomyPlugin);
+        // console.log(openmct.telemetry.defaultProviders.slice());
+        openmct.install(TelemetryPlugin);
+        // console.log(openmct.telemetry.defaultProviders.slice());
         openmct.start();
     </script>
 </body>
