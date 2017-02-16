@@ -118,7 +118,7 @@
                 {
                     "key": "value",
                     "name": "Value",
-                    "units": "\u0080C",
+                    "units": "℃",
                     "format": "float",
                     "hints": {
                         "y": 1,

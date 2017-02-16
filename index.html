@@ -13,10 +13,10 @@
         openmct.install(openmct.plugins.localStorage);
         openmct.install(openmct.plugins.snow);
         openmct.install(openmct.plugins.myItems);
+        openmct.install(openmct.plugins.Conductor({mode: 'realtime'}));
+        openmct.install(openmct.plugins.utcTimeSystem);
         openmct.install(TaxonomyPlugin);
-        // console.log(openmct.telemetry.defaultProviders.slice());
         openmct.install(TelemetryPlugin);
-        // console.log(openmct.telemetry.defaultProviders.slice());
         openmct.start();
     </script>
 </body>

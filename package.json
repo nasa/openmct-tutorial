@@ -1,0 +1,23 @@
+{
+  "name": "openmct-tutorials",
+  "version": "0.0.1",
+  "description": "Tutorials for Open MCT",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larkin/openmct-tutorials-sprint.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larkin/openmct-tutorials-sprint/issues"
+  },
+  "homepage": "https://github.com/larkin/openmct-tutorials-sprint#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "ws": "^2.0.3"
+  }
+}

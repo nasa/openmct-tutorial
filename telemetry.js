@@ -8,19 +8,32 @@ WebSocket server is a big part of this.
 
 */
 
+// GET /telemetry/:pointId?start=&end=
 
-var TelemetryProvider = {
+
+var HistoricalTelemetryProvider = {
     supportsRequest: function (domainObject) {
-        console.log('checking for applicability');
-        return domainObject.type === 'example.telemetry';
-    },
-    supportsSubscription: function (domainObject) {
         console.log('checking for applicability');
         return domainObject.type === 'example.telemetry';
     },
     request: function (domainObject, options) {
         console.log('attempting to provide for the children');
-        return Promise.resolve([]);
+        var url = 'http://localhost:8081/telemetry/' + 
+            domainObject.telemetry.key +
+            '?start=' + options.start +
+            '&end=' + options.end;
+        
+        return atomic.get(url)
+                .then(function (resp) {
+                    return resp.data;
+                })
+    }
+};
+
+var RealtimeTelemetryProvider = {
+    supportsSubscription: function (domainObject) {
+        console.log('checking for applicability');
+        return domainObject.type === 'example.telemetry';
     },
     subscribe: function (domainObject, callback, options) {
         console.log('attempting to subscribe to the status quo.');
@@ -31,4 +44,5 @@ var TelemetryProvider = {
 
 function TelemetryPlugin(openmct) {
     openmct.telemetry.addProvider(TelemetryProvider);
+    openmct.telemetry.addProvider(RealtimeTelemetryProvider);
 }
