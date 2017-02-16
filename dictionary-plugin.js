@@ -14,7 +14,7 @@ Add subobjects
 (function () {
 
     function getDictionary() {
-        return atomic.get('/dictionary.json')
+        return http.get('/dictionary.json')
             .then(function (result) {
                 return result.data;
             });

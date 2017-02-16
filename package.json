@@ -2,9 +2,9 @@
   "name": "openmct-tutorials",
   "version": "0.0.1",
   "description": "Tutorials for Open MCT",
-  "main": "index.html",
+  "main": "example-server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node example-server/server.js"
   },
   "repository": {
     "type": "git",

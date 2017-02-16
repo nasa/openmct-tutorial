@@ -3,7 +3,7 @@
  */
 
 function RealtimeTelemetryPlugin(openmct) {
-    var socket = new WebSocket('ws://localhost:8081');
+    var socket = new WebSocket('ws://localhost:8082');
     var listeners = {};
 
     socket.onmessage = function (event) {
