@@ -17,10 +17,6 @@ What do we use to simplify AJAX for tutorial.
 End of tomorrow:
 * These things done, plus an outline of the tutorial.
 * Should be ready to complete this.
-
-
-
-
 * Provide python server implementation
 
 # Bugs
@@ -41,6 +37,11 @@ Can attempt to save objects in immutable folders-- should check for mutability b
 
 * Time Conductor API: Needs to function even if the UI is not enabled.
   * Need realtime/etc to work without it.
+
+As is:
+  * run serve .
+  * run history (app.js)
+  * run realtime?
 
 
 NEed generic telemetry type??

@@ -6,8 +6,9 @@
 </head>
 <body>
     <script src="atomic.js"></script>
-    <script src="taxonomy.js"></script>
-    <script src="telemetry.js"></script>
+    <script src="dictionary-plugin.js"></script>
+    <script src="realtime-telemetry-plugin.js"></script>
+    <script src="historical-telemetry-plugin.js"></script>
     <script>
         openmct.setAssetPath('/openmct');
         openmct.install(openmct.plugins.localStorage);
@@ -15,8 +16,9 @@
         openmct.install(openmct.plugins.myItems);
         openmct.install(openmct.plugins.Conductor({mode: 'realtime'}));
         openmct.install(openmct.plugins.utcTimeSystem);
-        openmct.install(TaxonomyPlugin);
-        openmct.install(TelemetryPlugin);
+        openmct.install(DictionaryPlugin);
+        openmct.install(RealtimeTelemetryPlugin);
+        openmct.install(HistoricalTelemetryPlugin);
         openmct.start();
     </script>
 </body>

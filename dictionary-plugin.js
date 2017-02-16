@@ -64,7 +64,7 @@ Add subobjects
         }
     };
 
-    window.TaxonomyPlugin = function (openmct) {
+    window.DictionaryPlugin = function (openmct) {
         openmct.objects.addRoot({
             namespace: 'example.taxonomy',
             key: 'spacecraft'
