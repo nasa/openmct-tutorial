@@ -1,20 +1,36 @@
 
-VERY IMPORTANT
+# Bugs
+* [X] Why can't I add telemetry to table or fixed position?
+    * containment policy is based on TYPE, not on INSTANCE.  WHY?
+    * containment applies when objects 
+
+
+# Decisions to make (or work required for a decision)
+* [ ] Update strategy for tutorial (how are we going to present this code?)
+* [ ] enumeration formatting / format services in general.
+
+
+# Work to do:
+* [ ] Update documentation.
+  * [ ] Document Telemetry Metadata. (what are values, what properties matter?)
+    * remove source property.
+* [ ] format registry: key -> format class
+
 * [ ] Supporting new-style telemetry in old telemetry api. (support fixed position)
 * [ ] Enable time conductor and set default to last fifteen minutes
   * [ ] Time Conductor API: Needs to function even if the UI is not enabled.
     * [ ] Need realtime/etc to work without it.
-* [ ] enumeration formatting / format services in general.
-* [ ] NEed generic telemetry type??
-* [ ] standardize openmct.plugins: either they all are a function that returns a plugin or they are all a plugin.
-* [ ] Document Telemetry Metadata. (what are values, what properties matter?)
+* [ ] standardize openmct.plugins: they should all be functions that return a plugin.
+* [ ] Limit evaluator registration (it should be a separate registry)
 
-SLIGHTLY LESS IMPORTANT
-* [ ] Limit evaluator registration
 
-UNKNOWN:
+# SLIGHTLY LESS IMPORTANT
+* [ ] Need generic telemetry type??
+* [ ] Clean up composition policy to make sense (no more candidate, context);
+
+# UNKNOWN:
+
 * [ ] Fixing object API. (persistence spaces, etc.)
-* [ ] Update documentation.
 * [ ] Complete tutorial documentation.
 * [ ] Provide python server implementation.
 * [ ] Ensure new-style points can be added to fixed position.
