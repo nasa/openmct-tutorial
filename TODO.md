@@ -2,12 +2,10 @@
 # Bugs
 * [X] Why can't I add telemetry to table or fixed position?
     * containment policy is based on TYPE, not on INSTANCE.  WHY?
-    * containment applies when objects 
-
+    * containment applies when objects
 
 # Decisions to make (or work required for a decision)
 * [ ] Update strategy for tutorial (how are we going to present this code?)
-* [ ] enumeration formatting / format services in general.
 
 
 # Work to do:
@@ -22,7 +20,7 @@
     * [ ] Need realtime/etc to work without it.
 * [ ] standardize openmct.plugins: they should all be functions that return a plugin.
 * [ ] Limit evaluator registration (it should be a separate registry)
-
+* [ ] enumeration formatting / format services in general.
 
 # SLIGHTLY LESS IMPORTANT
 * [ ] Need generic telemetry type??
@@ -44,7 +42,7 @@ and also based on "applies to".  (maybe also applies to telemetry checking.)
 
 
 
-
+* [X] Determine strategy for finishing all work by next Wednesday. (So fri, tues, weds)  
 
 
 
