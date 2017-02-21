@@ -15,9 +15,9 @@
 * [ ] format registry: key -> format class
 
 * [ ] Supporting new-style telemetry in old telemetry api. (support fixed position)
-* [ ] Enable time conductor and set default to last fifteen minutes
-  * [ ] Time Conductor API: Needs to function even if the UI is not enabled.
-    * [ ] Need realtime/etc to work without it.
+* [X] Enable time conductor and set default to last fifteen minutes
+  * [X] Time Conductor API: Needs to function even if the UI is not enabled.
+    * [X] Need realtime/etc to work without it.
 * [ ] standardize openmct.plugins: they should all be functions that return a plugin.
 * [ ] Limit evaluator registration (it should be a separate registry)
 * [ ] enumeration formatting / format services in general.
