@@ -14,11 +14,11 @@
     * remove source property.
 * [ ] format registry: key -> format class
 
-* [ ] Supporting new-style telemetry in old telemetry api. (support fixed position)
+* [X] Supporting new-style telemetry in old telemetry api. (support fixed position)
 * [X] Enable time conductor and set default to last fifteen minutes
   * [X] Time Conductor API: Needs to function even if the UI is not enabled.
     * [X] Need realtime/etc to work without it.
-* [ ] standardize openmct.plugins: they should all be functions that return a plugin.
+* [X] standardize openmct.plugins: they should all be functions that return a plugin.
 * [ ] Limit evaluator registration (it should be a separate registry)
 * [ ] enumeration formatting / format services in general.
 
