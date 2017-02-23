@@ -5,50 +5,39 @@ These tutorials will walk you through the simple process of integrating your tel
 ## Tutorial Prerequisites
 
 * [node.js](https://nodejs.org/en/)
+    * Mac OS X: We recommend using Homebrew to install node.
+    * Windows: etc
+    * linux: 
 * [git](https://git-scm.com/)
+    * Mac OS X: It should be available outside 
+    * Windows: etc
+    * linux: etc
 
 Neither git nor node.js are requirements for using Open MCT, however this tutorial assumes that both are installed. Also, command line familiarity is a plus, however the tutorial is written in such a way that it should be possible to copy-paste the steps verbatim into a POSIX command line.
-
-## How to use this tutorial.
-
-As with any good cat, there are many ways to skin it.  Same applies to this tutorial - there are many ways to follow it.  The reader may simply follow the instructions in this tutorial, manually writing the tutorial code as they go along. However, you are free to jump around from step to step. This repository has been tagged at each step so that you can checkout the code at any point.  To skip to a specific section, `git checkout part-a-step-5`
-
-## Glossary
-
-* Object: An object is anything that can be represented in Open MCT. Telemetry sources, telemetry points, and views for visualizing telemetry data are all represented as objects in Open MCT. Objects are displayed in a tree in Open MCT, and allow a user to view telemetry data, and compose layouts from multiple view objects.
-* Telemetry Source: A service that provides telemetry. Telemetry can be provided in response to a request, or as a subscription. 
-* Telemetry Point: A telemetry point is a `thing` about which telemetry values are produced by a telemetry source. For example, a telemetry source might expose telemetry points for various instruments and subsystems on a spacecraft as telemetry points.
-
-# Getting started
 
 ## Installing the tutorials
 
 ```
-mkdir openmct
-cd openmct
-git clone ...something
+git clone git@github.com:larkin/openmct-tutorials-sprint.git
+cd openmct-tutorials-sprint
+npm install
+npm start
 ```
 
-Although this is not necessary if you are following the tutorials manually, this will give you a blank slate from which you can skip ahead to any step in the tutorials. 
+This will clone the tutorials and install Open MCT from NPM.  It will also install the dependencies needed to run the reference implementation of a telemetry server, and then it will start the tutorial server.
 
-The tutorials can be checked out from github (somehow - branch in main repo?) 
+At this point, you will be able to browse the tutorials in their completed state.  However, if you would like to follow along, you can skip to specific steps in the tutorial at any point by typing
 
-Initially you will be checked out at step 1 of part A the tutorial. You can skip ahead to any step by typing
 ```
-git checkout part-X-step-N
+git checkout -f part-X-step-N
 ```
 
 Substituting the appropriate part and step numbers as necessary.
 
-## Installing Open MCT
+## Part A: Running Open MCT
+**Shortcut**: `git checkout -f part-A`
 
-```
-npm install openmct
-```
-
-The latest version of Open MCT can be installed via npm. The command above will install Open MCT and its dependencies in your current directory
-
-## Including Open MCT
+We're going to define a single index.html page.  We'll include the Open MCT library, configure a number of plugins, and then start the application.
 
 ```html
 <!DOCTYPE html>
@@ -60,27 +49,19 @@ The latest version of Open MCT can be installed via npm. The command above will 
 <body>
     <script>
         openmct.setAssetPath('node_modules/openmct');
-        // Enable browser storage to persist user-created objects locally
         openmct.install(openmct.plugins.LocalStorage());
-        // Enable the 'MyItems' root for persisting user created objects
         openmct.install(openmct.plugins.MyItems());
-        // Enable the 'Espresso' theme
         openmct.install(openmct.plugins.Espresso());
-        // The UTC time system plugin adds support for representing UTC time in Open MCT.
         openmct.install(openmct.plugins.UTCTimeSystem());
-        // Bootstrap the Open MCT application
         openmct.start();
     </script>
 </body>
 </html>
 ```
-In the example above, Open MCT is included in a web page using a simple `script` tag. This will make the openmct API universally accessible as a global variable named `openmct`.
- 
-Alternatively, Open MCT supports UMD (Universal Module Definition), and can be included using UMD compatible libraries such as [RequireJS](http://requirejs.org/) and [CommonJS](http://www.commonjs.org/)
 
-API documentation for Open MCT is available [on our website](https://nasa.github.io/openmct/docs/api/). In this tutorial we will start with a basic HTML page
 
-# Part A - Populating the Object Tree
+
+# Part B - Populating the Object Tree
 ## Introduction
 In Open MCT everything is represented as an object, this includes sources of telemetry, telemetry points, and views for visualizing telemetry. Objects are accessible from the object tree 
 
@@ -91,31 +72,55 @@ In the first part of this tutorial we are going to populate the object tree with
 The object tree is a hierarchical representation of all of the objects available in Open MCT. At the root of an object hierarchy is a root object. For this tutorial, we are going to create a new root object representing our spacecraft, and then populate it with objects representing the telemetry producing subsystems on our fictional spacecraft.
 
 ## Step 1 - Defining a new plugin
+**Shortcut:** `git checkout -f part-b-step-1`
+Let's create a new javascript file, `dictionary-plugin.js` for our new plugin.  We'll then install that plugin into Open MCT to validate that we are loading the plugin
 
+[dictionary-plugin.js]()
 ```javascript
-(function () {
-    window.DictionaryPlugin = function (openmct) {
-      // A plugin adds functionality through calls to the openmct API
-      // eg. openmct.telemetry.addProvider(...);
-      ...
-    };
-}());
+var DictionaryPlugin = function () {
+    
+    return function install() {
+        console.log("I've been installed!");
+    }
+};
 ```
-[dictionary-plugin.js]() 
 
-A plugin is simply defined as an initialization function which receives a single argument - the Open MCT API. For the purposes of this tutorial, we define a new `DictionaryPlugin` inside of an [immediately invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression), but this particular approach is not a requirement.
+Then, we'll update index.html to include the file:
 
-Open MCT supports extension through its plugin architecture. A plugin is used to encapsulate all of the code, resources (such as HTML, images, and CSS), and dependencies necessary to extend Open MCT.
-
-We are going to create a new plugin named 'DictionaryPlugin' which will fetch a data dictionary describing the telemetry available for a spacecraft, and use it to populate the object tree. We will define this plugin in a separate file named [dictionary-plugin.js](), and include it from [index.html]() using a script tag. 
-
-Once defined, a plugin can be installed by passing its initialization function to the `install` function on the openmct object.
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open MCT Tutorials</title>
+    <script src="node_modules/openmct/openmct.js"></script>
+    <script src="dictionary-plugin.js"></script>
+</head>
+<body>
+    <script>
+        openmct.setAssetPath('node_modules/openmct');
+        openmct.install(openmct.plugins.LocalStorage());
+        openmct.install(openmct.plugins.MyItems());
+        openmct.install(openmct.plugins.Espresso());
+        openmct.install(openmct.plugins.UTCTimeSystem());
+        
+        openmct.install(DictionaryPlugin());
+        openmct.start();
+    </script>
+</body>
+</html>
 ```
-  openmct.install(DictionaryPlugin);
-```
-[index.html]() 
+
+--> What should you see when you refresh your browser?
+
+An Open MCT plugin is very simple: it's an initialization function which receives a single argument - the Open MCT API.  It then uses the Open MCT API to extend Open MCT.  Generally, we like plugins to return an initialization function so they can receive configuration.
+
+[Learn more about plugins here](api/plugin-overview.md)
+
 
 ## Step 2 - Creating a new root object node
+**Shortcut:** `git checkout -f part-b-step-2`
+
+--> tell them what they should do
 
 ```javascript
   openmct.objects.addRoot({
@@ -125,7 +130,10 @@ Once defined, a plugin can be installed by passing its initialization function t
 ```
 _Snippet from [dictionary-plugin.js]()_
 
-__To jump to this step, use the command `git checkout part-a-step-3` to checkout all content from the previous step__
+--> tell them what they should see in their browser
+    look, there's a question mark-- we registered a root, and next we need to provide a domainObject....
+
+--> one paragraph or less explaining "what", with a link to more info.
 
 A new root can be added to the object tree using the `addRoot` function exposed by the Open MCT API. `addRoot` accepts an object identifier, defined as a javascript object with a `namespace` and a `key` attribute. 
 
@@ -136,6 +144,7 @@ The `openmct` object is made available to a plugin's initializer function, so th
 __RELOAD APP AT THIS POINT TO SEE THE ROOT NODE ?__.
 
 ## Step 3 - Providing objects
+**Shortcut:** `git checkout -f part-b-step-3`
 
 __To jump to this step, use the command `git checkout part-a-step-3` to checkout all content from the previous step__
 
@@ -166,7 +175,7 @@ var objectProvider = {
       ...
     }
 };
-    
+
 openmct.objects.addProvider('example.taxonomy', objectProvider);
 ```
 __To jump to this step, use the command `git checkout part-a-step-3` to checkout all content from the previous step__
@@ -237,14 +246,14 @@ openmct.composition.addProvider(compositionProvider);
 ```
 _Snippet from [dictionary-plugin.js]()_
 
-# Part B - Requesting Telemetry
+# Part C - Integrate/Provide/Request Telemetry
 
 ## Introduction
 ## Step 1
 ## Step 2
 ## Step 3
 
-# Part B - Subscribing to Telemetry
+# Part D - Subscribing to Telemetry
 
 ## Introduction
 ## Step 1
@@ -276,3 +285,16 @@ npm start
 
 # 
 
+
+
+## How to use this tutorial.
+
+As with any good cat, there are many ways to skin it.  Same applies to this tutorial - there are many ways to follow it.  The reader may simply follow the instructions in this tutorial, manually writing the tutorial code as they go along. However, you are free to jump around from step to step. This repository has been tagged at each step so that you can checkout the code at any point.  To skip to a specific section, `git checkout part-a-step-5`
+
+## Glossary
+
+* Domain Object: An object is anything that can be represented in Open MCT. Telemetry sources, telemetry points, and views for visualizing telemetry data are all represented as objects in Open MCT. Objects are displayed in a tree in Open MCT, and allow a user to view telemetry data, and compose layouts from multiple view objects.
+* Telemetry Source: A service that provides telemetry. Telemetry can be provided in response to a request, or as a subscription. 
+* Telemetry Point: A telemetry point is a `thing` about which telemetry values are produced by a telemetry source. For example, a telemetry source might expose telemetry points for various instruments and subsystems on a spacecraft as telemetry points.
+
+# Getting started
