@@ -17,13 +17,16 @@ function Spacecraft() {
     Object.keys(this.state).forEach(function (k) {
         this.history[k] = [];
     }, this);
+
     setInterval(function () {
         this.updateState();
         this.generateTelemetry();
     }.bind(this), 1000);
+
     console.log("Example spacecraft launched!");
     console.log("Press Enter to toggle thruster state.");
-    process.stdin.on('data', function (data) {
+
+    process.stdin.on('data', function () {
         this.state['prop.thrusters'] =
             (this.state['prop.thrusters'] === "OFF") ? "ON" : "OFF";
         this.state['comms.recd'] += 32;
