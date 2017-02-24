@@ -55,7 +55,7 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct');
+        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.Espresso());
@@ -70,7 +70,7 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
 ## Introduction
 In Open MCT everything is represented as a Domain Object, this includes sources of telemetry, telemetry points, and views for visualizing telemetry. Domain Objects are accessible from the object tree 
 
-INSERT SCREENSHOT HERE.
+![Domain Objects are accessible from the object tree](images/object-tree.png)
 
 The object tree is a hierarchical representation of all of the objects available in Open MCT. At the root of an object hierarchy is a root object. For this tutorial, we are going to create a new root object representing our spacecraft, and then populate it with objects representing the telemetry producing subsystems on our fictional spacecraft.
 
