@@ -10,12 +10,11 @@
     <script src="realtime-telemetry-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
     <script>
-        openmct.setAssetPath('/openmct');
+        openmct.setAssetPath('/node_modules/openmct/dist');
         openmct.install(openmct.plugins.localStorage);
         openmct.install(openmct.plugins.snow);
         openmct.install(openmct.plugins.myItems);
-        openmct.install(openmct.plugins.Conductor({showConductor: false}));
-        openmct.install(openmct.plugins.UTCTimeSystem());
+        //openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.install(DictionaryPlugin);
         openmct.install(RealtimeTelemetryPlugin);
         openmct.install(HistoricalTelemetryPlugin);
