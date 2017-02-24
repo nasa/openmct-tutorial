@@ -3,6 +3,7 @@
 # Work to do:
 * [ ] AKHenry+Pete -- to complete revisions to master for conductor/etc.
 * [ ] AKHenry -- to complete tutorials
+* [ ] AKHenry -- setup tags in repo
 * [ ] Pete -- to update API docs.
     * [ ] Update documentation.
     * [ ] Document Telemetry Metadata. (what are values, what properties matter?)
