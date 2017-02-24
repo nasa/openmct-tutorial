@@ -4,7 +4,8 @@
   "description": "Tutorials for Open MCT",
   "main": "example-server/server.js",
   "scripts": {
-    "start": "node example-server/server.js"
+    "start": "node example-server/server.js",
+    "postinstall": "cd node_modules/openmct && npm install"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/larkin/openmct-tutorials-sprint#readme",
   "dependencies": {
     "express": "^4.14.1",
-    "ws": "^2.0.3"
+    "ws": "^2.0.3",
+    "openmct": "nasa/openmct"
   }
 }

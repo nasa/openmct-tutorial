@@ -43,7 +43,7 @@ Substituting the appropriate part and step numbers as necessary.
 ## Part A: Running Open MCT
 **Shortcut**: `git checkout -f part-A`
 
-We're going to define a single index.html page.  We'll include the Open MCT library, configure a number of plugins, and then start the application.
+We're going to define a single `index.html` page.  We'll include the Open MCT library, configure a number of plugins, and then start the application.
 
 [index.html]()
 ```html
@@ -51,7 +51,7 @@ We're going to define a single index.html page.  We'll include the Open MCT libr
 <html>
 <head>
     <title>Open MCT Tutorials</title>
-    <script src="node_modules/openmct/openmct.js"></script>
+    <script src="node_modules/openmct/dist/openmct.js"></script>
 </head>
 <body>
     <script>
@@ -96,7 +96,7 @@ Then, we'll update index.html to include the file:
 <html>
 <head>
     <title>Open MCT Tutorials</title>
-    <script src="node_modules/openmct/openmct.js"></script>
+    <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="dictionary-plugin.js"></script>
 </head>
 <body>
@@ -369,7 +369,7 @@ _[index.html]()_
 <html>
 <head>
     <title>Open MCT Tutorials</title>
-    <script src="node_modules/openmct/openmct.js"></script>
+    <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="dictionary-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
 </head>
