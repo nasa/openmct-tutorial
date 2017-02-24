@@ -8,6 +8,7 @@
     * [ ] Document Telemetry Metadata. (what are values, what properties matter?)
         * remove source property.
         * What are the attributes of a domain object?
+* [ ] Pete -- publish Open MCT to NPM
 
 # DONE
 
