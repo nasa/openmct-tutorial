@@ -418,7 +418,7 @@ function HistoricalTelemetryPlugin() {
 }
 ```
 
-The telemetry adapter above defines two functions. The first of these, `supportsRequest`, is necesssary to indicate that this telemetry adapter supports requesting telemetry from a telemetry store. The `request` function will retrieve telemetry data and return it to the Open MCT application for display.
+The telemetry adapter above defines two functions. The first of these, `supportsRequest`, is necessary to indicate that this telemetry adapter supports requesting telemetry from a telemetry store. The `request` function will retrieve telemetry data and return it to the Open MCT application for display.
 
 Our request function also accepts some options. Here we support the specification of a start and end date.
 
@@ -456,7 +456,7 @@ At this point If we refresh the page we should now see some telemetry for our te
 # Part D - Subscribing to New Telemetry
 **Shortcut:** `git checkout -f part-d`
 
-We are now going to define a telemetry adapter that allows Open MCT to subscribe to our tutorial server for new telemetry as it becomes available. The process of defining a telemetry adapter for subscribing to real-time telemetry is similar to our previous adapter, except that we define a `supportsSubscribe` function to indicate that this adapter provides telemetry subscriptions, and a `subscribe` function. This adapter uses a simple messaging system for subscribing to telemetry updates over a websocket connection. 
+We are now going to define a telemetry adapter that allows Open MCT to subscribe to our tutorial server for new telemetry as it becomes available. The process of defining a telemetry adapter for subscribing to real-time telemetry is similar to our previous adapter, except that we define a `supportsSubscribe` function to indicate that this adapter provides telemetry subscriptions, and a `subscribe` function. This adapter uses a simple messaging system for subscribing to telemetry updates over a websocket. 
 
 Let's define our new plugin in a file named `realtime-telemetry-plugin.js`.
 
