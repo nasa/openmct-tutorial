@@ -4,21 +4,23 @@
     <title>Open MCT Tutorials</title>
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
+    <script src="dictionary-plugin.js"></script>
+    <script src="historical-telemetry-plugin.js"></script>
+    <script src="realtime-telemetry-plugin.js"></script>
 </head>
 <body>
-    <script src="dictionary-plugin.js"></script>
-    <script src="realtime-telemetry-plugin.js"></script>
-    <script src="historical-telemetry-plugin.js"></script>
     <script>
-        openmct.setAssetPath('/node_modules/openmct/dist');
+        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.localStorage);
-        openmct.install(openmct.plugins.snow);
         openmct.install(openmct.plugins.myItems);
         //openmct.install(openmct.plugins.UTCTimeSystem());
-        openmct.install(DictionaryPlugin);
-        openmct.install(RealtimeTelemetryPlugin);
-        openmct.install(HistoricalTelemetryPlugin);
-        openmct.start();
+        openmct.install(openmct.plugins.espresso);
+        
+	openmct.install(DictionaryPlugin());
+        openmct.install(HistoricalTelemetryPlugin());
+	openmct.install(RealtimeTelemetryPlugin());
+        
+	openmct.start();
     </script>
 </body>
 </html>
