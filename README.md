@@ -2,11 +2,6 @@
 
 These tutorials will walk you through the simple process of integrating your telemetry systems with Open MCT.  In case you don't have any telemetry systems, we've included a reference implementation of a historical and realtime server.  We'll walk you through the process of integrating those services with Open MCT.
 
-## How to use this tutorial.
-
-As with any good cat, there are many ways to skin it.  Same applies to this tutorial - there are many ways to follow it.  The reader may simply follow the instructions in this tutorial, manually writing the tutorial code as they go along. However, you are free to jump around from step to step. This repository has been tagged at each step so that you can checkout the code at any point.  To skip to a specific section, `git checkout part-a-step-5`
-
-
 ## Tutorial Prerequisites
 
 * [node.js](https://nodejs.org/en/)
@@ -358,11 +353,9 @@ function HistoricalTelemetryPlugin(openmct) {
 }
 ```
 
-The telemetry adapter above defines two functions. The first of these, `supportsRequest`, indicates that this telemetry adapter will request telemetry from a telemetry store. The `request` function will retrieve telemetry data and return it to the Open MCT application for display.
+The telemetry adapter above defines two functions. The first of these, `supportsRequest`, is necesssary to indicate that this telemetry adapter supports requesting telemetry from a telemetry store. The `request` function will retrieve telemetry data and return it to the Open MCT application for display.
 
-This adapter is fairly basic. Part of the reason for this is that the tutorial telemetry server returns data in a format
-
-We also need to update `index.html` to include our new adapter.
+With our adapter defined, we need to update `index.html` to include it.
 
 _[index.html]()_
 ```html
@@ -389,10 +382,12 @@ _[index.html]()_
 </html>
 ```
 
+At this point If we refresh the page we should now see some telemetry for our telemetry points. For example, navigating to the 'BLAH' telemetry point should show us a plot of the telemetry generated since the server started running. It should look something like the screenshot below.
+
 # Part D - Subscribing to New Telemetry
 **Shortcut:** `git checkout -f part-d`
 
-
+We are now going to define a telemetry adapter that allows Open MCT to subscribe to our tutorial server for new telemetry as it becomes available. The process of defining a telemetry adapter for subscribing to real-time telemetry is similar to our previous adapter, except that we define a `supportsSubscribe` function to indicate that this adapter provides telemetry subscriptions, and a `subscribe` function. This adapter uses a simple messaging system for subscribing to telemetry updates over a websocket connection. 
 
 ```javascript
 /**
@@ -425,7 +420,6 @@ function RealtimeTelemetryPlugin(openmct) {
             }
             listeners[domainObject.telemetry.key].push(callback);
             return function () {
-                console.log('unsubscribe');
                 listeners[domainObject.telemetry.key] = 
                     listeners[domainObject.telemetry.key].filter(function (c) {
                         return c !== callback;
@@ -442,11 +436,9 @@ function RealtimeTelemetryPlugin(openmct) {
 }
 ```
 
-## Running the tutorial server:
-```
-npm install
-npm start
-```
+The subscribe function accepts as arguments the domain object for which we are interested in telemetry, and a callback function. The callback function will be invoked with telemetry data as they become available.
+
+If we refresh the page, we should now see telemetry flowing for our telemetry points. For example, navigating to the 'BLAH' telemetry point should show us a plot of the telemetry point's telemetry.
 
 ## Glossary
 

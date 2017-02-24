@@ -28,7 +28,6 @@ function RealtimeTelemetryPlugin(openmct) {
             }
             listeners[domainObject.telemetry.key].push(callback);
             return function () {
-                console.log('unsubscribe');
                 listeners[domainObject.telemetry.key] = 
                     listeners[domainObject.telemetry.key].filter(function (c) {
                         return c !== callback;
