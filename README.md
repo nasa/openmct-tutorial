@@ -5,13 +5,19 @@ These tutorials will walk you through the simple process of integrating your tel
 ## Tutorial Prerequisites
 
 * [node.js](https://nodejs.org/en/)
-    * Mac OS X: We recommend using Homebrew to install node.
-    * Windows: etc
-    * linux: 
+    * Mac OS: We recommend using [Homebrew](https://brew.sh/) to install node.
+    ```
+    $ brew install node
+    ```
+    * Windows: https://nodejs.org/en/download/
+    * linux: https://nodejs.org/en/download/
 * [git](https://git-scm.com/)
-    * Mac OS X: It should be available outside 
-    * Windows: etc
-    * linux: etc
+    * Mac OS: If XCode is installed, git is likely to already be available from your command line. If not, git can be installed using [Homebrew](https://brew.sh/).
+    ```
+    $ brew install git
+    ```
+    * Windows: https://git-scm.com/downloads
+    * linux: https://git-scm.com/downloads
 
 Neither git nor node.js are requirements for using Open MCT, however this tutorial assumes that both are installed. Also, command line familiarity is a plus, however the tutorial is written in such a way that it should be possible to copy-paste the steps verbatim into a POSIX command line.
 
