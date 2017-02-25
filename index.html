@@ -11,15 +11,15 @@
 <body>
     <script>
         openmct.setAssetPath('node_modules/openmct/dist');
-        openmct.install(openmct.plugins.localStorage);
-        openmct.install(openmct.plugins.myItems);
-        //openmct.install(openmct.plugins.UTCTimeSystem());
-        openmct.install(openmct.plugins.espresso);
-        
+        openmct.install(openmct.plugins.LocalStorage());
+        openmct.install(openmct.plugins.MyItems());
+        openmct.install(openmct.plugins.UTCTimeSystem());
+        openmct.install(openmct.plugins.Espresso());
+
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
-    	openmct.install(RealtimeTelemetryPlugin());
-        
+        openmct.install(RealtimeTelemetryPlugin());
+
         openmct.start();
     </script>
 </body>
