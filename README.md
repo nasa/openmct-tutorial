@@ -114,7 +114,7 @@ Then, we'll update index.html to include the file:
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct');
+        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.Espresso());
