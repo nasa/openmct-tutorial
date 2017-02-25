@@ -1,16 +1,11 @@
 
 
 # Work to do:
-* [ ] AKHenry+Pete -- to complete revisions to master for conductor/etc.
-* [ ] AKHenry -- to complete tutorials
 * [ ] AKHenry -- setup tags in repo
-* [ ] Pete -- to update API docs.
-    * [ ] Update documentation.
+* [X] Pete -- Finish API docs.
+    * [ ] Proof read docs and edit as needed
     * [ ] Document Telemetry Metadata. (what are values, what properties matter?)
         * remove source property.
-        * What are the attributes of a domain object?
-* [ ] Pete -- publish Open MCT to NPM
-
 # DONE
 
 * [X] Supporting new-style telemetry in old telemetry api. (support fixed position)
@@ -18,9 +13,10 @@
   * [X] Time Conductor API: Needs to function even if the UI is not enabled.
     * [X] Need realtime/etc to work without it.
 * [X] standardize openmct.plugins: they should all be functions that return a plugin.
-
 * [X] Update strategy for tutorial (how are we going to present this code?)
-
+* [X] AKHenry+Pete -- to complete revisions to master for conductor/etc.
+* [X] AKHenry -- to complete tutorials
+* [X] AKHenry - Updated docs
 
 # Bugs
 * [X] Why can't I add telemetry to table or fixed position?
@@ -31,6 +27,7 @@
 
 
 # SLIGHTLY LESS IMPORTANT
+* [ ] Pete -- publish Open MCT to NPM
 * [ ] Need generic telemetry type??
 * [X] Clean up composition policy to make sense (no more candidate, context);
 * [ ] Limit evaluator registration (it should be a separate registry)
