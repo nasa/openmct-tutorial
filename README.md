@@ -41,7 +41,7 @@ git checkout -f part-X-step-N
 Substituting the appropriate part and step numbers as necessary.
 
 ## Part A: Running Open MCT
-**Shortcut**: `git checkout -f part-A`
+**Shortcut**: `git checkout -f part-a`
 
 We're going to define a single `index.html` page.  We'll include the Open MCT library, configure a number of plugins, and then start the application.
 
@@ -89,6 +89,7 @@ The object tree is a hierarchical representation of all of the objects available
 
 ## Step 1 - Defining a new plugin
 **Shortcut:** `git checkout -f part-b-step-1`
+
 Let's start by creating a new plugin to populate the object tree. We will encapsulate the code for this plugin in a new javascript file named `dictionary-plugin.js`. We'll then install that plugin into Open MCT to validate that we are loading the plugin
 
 [dictionary-plugin.js]()
