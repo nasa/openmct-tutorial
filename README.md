@@ -24,7 +24,7 @@ Neither git nor node.js are requirements for using Open MCT, however this tutori
 ## Installing the tutorials
 
 ```
-git clone git@github.com:larkin/openmct-tutorial.git
+git clone https://github.com/nasa/openmct-tutorial.git
 cd openmct-tutorial
 npm install
 npm start
