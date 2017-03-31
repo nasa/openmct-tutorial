@@ -11,13 +11,16 @@
                     "name": "Value",
                     "units": "kilograms",
                     "format": "float",
+                    "min": 0,
+                    "max": 100,
                     "hints": {
                         "y": 1,
                         "range": 1
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -37,11 +40,11 @@
                     "format": "enum",
                     "enumerations": [
                         {
-                            "string": "On",
+                            "string": "ON",
                             "value": 1
                         },
                         {
-                            "string": "Off",
+                            "string": "OFF",
                             "value": 0
                         }
                     ],
@@ -51,7 +54,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -76,7 +80,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -101,7 +106,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -126,7 +132,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -151,7 +158,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
@@ -176,7 +184,8 @@
                     }
                 },
                 {
-                    "key": "timestamp",
+                    "key": "utc",
+                    "source": "timestamp",
                     "name": "Timestamp",
                     "format": "utc",
                     "hints": {
