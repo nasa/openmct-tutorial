@@ -138,8 +138,6 @@ The process of opening a javascript console differs depending on the browser bei
 
 In summary, an Open MCT plugin is very simple: it's an initialization function which receives the Open MCT API as the single argument.  It then uses the provided API to extend Open MCT.  Generally, we like plugins to return an initialization function so they can receive configuration.
 
-[Learn more about plugins here](api/plugin-overview.md)
-
 ## Step 2 - Creating a new root node
 **Shortcut:** `git checkout -f part-b-step-2`
 
