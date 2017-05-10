@@ -63,8 +63,10 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
         openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.Espresso());
         openmct.install(openmct.plugins.UTCTimeSystem());
+        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.install(openmct.plugins.Espresso());
+
         openmct.start();
     </script>
 </body>
@@ -124,10 +126,12 @@ Next, we'll update index.html to include the file:
         openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.Espresso());
         openmct.install(openmct.plugins.UTCTimeSystem());
-        
+        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.install(openmct.plugins.Espresso());
+
         openmct.install(DictionaryPlugin());
+
         openmct.start();
     </script>
 </body>
@@ -156,8 +160,8 @@ To be able to access our spacecraft objects from the tree, we first need to defi
 function DictionaryPlugin() {
     return function install(openmct) {
         openmct.objects.addRoot({
-          namespace: 'example.taxonomy',
-          key: 'spacecraft'
+            namespace: 'example.taxonomy',
+            key: 'spacecraft'
         });
     }
 };
@@ -169,7 +173,7 @@ If we reload the browser now, we should see a new object in the tree.
  
  ![Open MCT](images/openmct-missing-root.png)
  
- Currently it will appear as a question mark with `Missing: example.taxonomy:spacecraft` next to it. This is because for now all we've done is provide an identifier for the root node. In the next step, we will define an __Object Provider__, which will provide Open MCT with an object for this identifier. A [basic overview of object providers](https://github.com/nasa/openmct/blob/master/API.md#object-providers) is available in our API documentation.
+Currently it will appear as a question mark with `Missing: example.taxonomy:spacecraft` next to it. This is because for now all we've done is provide an identifier for the root node. In the next step, we will define an __Object Provider__, which will provide Open MCT with an object for this identifier. A [basic overview of object providers](https://github.com/nasa/openmct/blob/master/API.md#object-providers) is available in our API documentation.
 
 ## Step 3 - Providing objects
 **Shortcut:** `git checkout -f part-b-step-3`
@@ -258,7 +262,9 @@ var objectProvider = {
                     identifier: identifier,
                     name: measurement.name,
                     type: 'example.telemetry',
-                    telemetry: measurement,
+                    telemetry: {
+                        values: measurement.values
+                    },
                     location: 'example.taxonomy:spacecraft'
                 };
             }
@@ -338,7 +344,9 @@ var objectProvider = {
                     identifier: identifier,
                     name: measurement.name,
                     type: 'example.telemetry',
-                    telemetry: measurement,
+                    telemetry: {
+                        values: measurement.values
+                    },
                     location: 'example.taxonomy:spacecraft'
                 };
             }
@@ -409,7 +417,7 @@ function HistoricalTelemetryPlugin() {
             },
             request: function (domainObject, options) {
                 var url = 'http://localhost:8081/telemetry/' +
-                    domainObject.telemetry.key +
+                    domainObject.identifier.key +
                     '?start=' + options.start +
                     '&end=' + options.end;
     
@@ -447,11 +455,13 @@ With our adapter defined, we need to update `index.html` to include it.
         openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.Espresso());
         openmct.install(openmct.plugins.UTCTimeSystem());
-        
+        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.install(openmct.plugins.Espresso());
+
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
+
         openmct.start();
     </script>
 </body>
@@ -491,21 +501,21 @@ function RealtimeTelemetryPlugin() {
                 return domainObject.type === 'example.telemetry';
             },
             subscribe: function (domainObject, callback, options) {
-                if (!listeners[domainObject.telemetry.key]) {
-                    listeners[domainObject.telemetry.key] = [];
+                if (!listeners[domainObject.identifier.key]) {
+                    listeners[domainObject.identifier.key] = [];
                 }
-                if (!listeners[domainObject.telemetry.key].length) {
-                    socket.send('subscribe ' + domainObject.telemetry.key);
+                if (!listeners[domainObject.identifier.key].length) {
+                    socket.send('subscribe ' + domainObject.identifier.key);
                 }
-                listeners[domainObject.telemetry.key].push(callback);
+                listeners[domainObject.identifier.key].push(callback);
                 return function () {
-                    listeners[domainObject.telemetry.key] = 
-                        listeners[domainObject.telemetry.key].filter(function (c) {
+                    listeners[domainObject.identifier.key] = 
+                        listeners[domainObject.identifier.key].filter(function (c) {
                             return c !== callback;
                         });
     
-                    if (!listeners[domainObject.telemetry.key].length) {
-                        socket.send('unsubscribe ' + domainObject.telemetry.key);
+                    if (!listeners[domainObject.identifier.key].length) {
+                        socket.send('unsubscribe ' + domainObject.identifier.key);
                     }
                 };
             }
@@ -537,12 +547,14 @@ With our realtime telemetry plugin defined, let's include it from `index.html`.
         openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.Espresso());
         openmct.install(openmct.plugins.UTCTimeSystem());
-        
+        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.install(openmct.plugins.Espresso());
+
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
         openmct.install(RealtimeTelemetryPlugin());
+
         openmct.start();
     </script>
 </body>

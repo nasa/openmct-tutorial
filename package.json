@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/larkin/openmct-tutorials-sprint.git"
+    "url": "git+https://github.com/nasa/openmct-tutorial.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/larkin/openmct-tutorials-sprint/issues"
+    "url": "https://github.com/nasa/openmct-tutorial/issues"
   },
-  "homepage": "https://github.com/larkin/openmct-tutorials-sprint#readme",
+  "homepage": "https://github.com/nasa/openmct-tutorial#readme",
   "dependencies": {
     "express": "^4.14.1",
     "ws": "^2.0.3",
