@@ -23,7 +23,9 @@ var objectProvider = {
                     identifier: identifier,
                     name: measurement.name,
                     type: 'example.telemetry',
-                    telemetry: measurement,
+                    telemetry: {
+                        values: measurement.values
+                    },
                     location: 'example.taxonomy:spacecraft'
                 };
             }
@@ -55,11 +57,11 @@ var DictionaryPlugin = function (openmct) {
             namespace: 'example.taxonomy',
             key: 'spacecraft'
         });
-    
+
         openmct.objects.addProvider('example.taxonomy', objectProvider);
-    
+
         openmct.composition.addProvider(compositionProvider);
-    
+
         openmct.types.addType('example.telemetry', {
             name: 'Example Telemetry Point',
             description: 'Example telemetry point from our happy tutorial.',
