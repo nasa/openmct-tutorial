@@ -65,6 +65,7 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.Espresso());
 
         openmct.start();
@@ -128,6 +129,7 @@ Next, we'll update index.html to include the file:
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());
@@ -416,7 +418,7 @@ function HistoricalTelemetryPlugin() {
                 return domainObject.type === 'example.telemetry';
             },
             request: function (domainObject, options) {
-                var url = 'http://localhost:8081/telemetry/' +
+                var url = '/history/' +
                     domainObject.identifier.key +
                     '?start=' + options.start +
                     '&end=' + options.end;
@@ -457,6 +459,7 @@ With our adapter defined, we need to update `index.html` to include it.
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());
@@ -484,15 +487,13 @@ Let's define our new plugin in a file named `realtime-telemetry-plugin.js`.
  */
 function RealtimeTelemetryPlugin() {
     return function (openmct) {
-        var socket = new WebSocket('ws://localhost:8082');
-        var listeners = {};
+        var socket = new WebSocket(location.origin.replace(/^http/, 'ws') + '/realtime/');
+        var listener = {};
     
         socket.onmessage = function (event) {
             point = JSON.parse(event.data);
-            if (listeners[point.id]) {
-                listeners[point.id].forEach(function (l) {
-                    l(point);
-                });
+            if (listener[point.id]) {
+                listener[point.id](point);
             }
         };
         
@@ -500,23 +501,12 @@ function RealtimeTelemetryPlugin() {
             supportsSubscribe: function (domainObject) {
                 return domainObject.type === 'example.telemetry';
             },
-            subscribe: function (domainObject, callback, options) {
-                if (!listeners[domainObject.identifier.key]) {
-                    listeners[domainObject.identifier.key] = [];
-                }
-                if (!listeners[domainObject.identifier.key].length) {
-                    socket.send('subscribe ' + domainObject.identifier.key);
-                }
-                listeners[domainObject.identifier.key].push(callback);
-                return function () {
-                    listeners[domainObject.identifier.key] = 
-                        listeners[domainObject.identifier.key].filter(function (c) {
-                            return c !== callback;
-                        });
-    
-                    if (!listeners[domainObject.identifier.key].length) {
-                        socket.send('unsubscribe ' + domainObject.identifier.key);
-                    }
+            subscribe: function (domainObject, callback) {
+                listener[domainObject.identifier.key] = callback;
+                socket.send('subscribe ' + domainObject.identifier.key);
+                return function unsubscribe() {
+                    delete listener[domainObject.identifier.key];
+                    socket.send('unsubscribe ' + domainObject.identifier.key);
                 };
             }
         };
@@ -549,6 +539,7 @@ With our realtime telemetry plugin defined, let's include it from `index.html`.
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+        openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());

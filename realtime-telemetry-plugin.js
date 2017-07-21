@@ -3,15 +3,13 @@
  */
 function RealtimeTelemetryPlugin() {
     return function (openmct) {
-        var socket = new WebSocket('ws://localhost:8082');
-        var listeners = {};
+        var socket = new WebSocket(location.origin.replace(/^http/, 'ws') + '/realtime/');
+        var listener = {};
 
         socket.onmessage = function (event) {
             point = JSON.parse(event.data);
-            if (listeners[point.id]) {
-                listeners[point.id].forEach(function (l) {
-                    l(point);
-                });
+            if (listener[point.id]) {
+                listener[point.id](point);
             }
         };
 
@@ -19,23 +17,12 @@ function RealtimeTelemetryPlugin() {
             supportsSubscribe: function (domainObject) {
                 return domainObject.type === 'example.telemetry';
             },
-            subscribe: function (domainObject, callback, options) {
-                if (!listeners[domainObject.identifier.key]) {
-                    listeners[domainObject.identifier.key] = [];
-                }
-                if (!listeners[domainObject.identifier.key].length) {
-                    socket.send('subscribe ' + domainObject.identifier.key);
-                }
-                listeners[domainObject.identifier.key].push(callback);
-                return function () {
-                    listeners[domainObject.identifier.key] =
-                        listeners[domainObject.identifier.key].filter(function (c) {
-                            return c !== callback;
-                        });
-
-                    if (!listeners[domainObject.identifier.key].length) {
-                        socket.send('unsubscribe ' + domainObject.identifier.key);
-                    }
+            subscribe: function (domainObject, callback) {
+                listener[domainObject.identifier.key] = callback;
+                socket.send('subscribe ' + domainObject.identifier.key);
+                return function unsubscribe() {
+                    delete listener[domainObject.identifier.key];
+                    socket.send('unsubscribe ' + domainObject.identifier.key);
                 };
             }
         };
