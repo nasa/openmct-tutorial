@@ -5,6 +5,7 @@
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
     <script src="dictionary-plugin.js"></script>
+    <script src="historical-telemetry-plugin.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             openmct.setAssetPath('node_modules/openmct/dist');
@@ -16,6 +17,7 @@
             openmct.install(openmct.plugins.Espresso());
             
             openmct.install(DictionaryPlugin());
+            openmct.install(HistoricalTelemetryPlugin());
     
             openmct.start();
         });
