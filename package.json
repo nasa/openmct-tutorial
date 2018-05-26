@@ -4,8 +4,7 @@
   "description": "Tutorials for Open MCT",
   "main": "example-server/server.js",
   "scripts": {
-    "start": "node example-server/server.js",
-    "postinstall": "cd node_modules/openmct && npm install"
+    "start": "node example-server/server.js"
   },
   "repository": {
     "type": "git",
