@@ -44,6 +44,8 @@ Substituting the appropriate part and step numbers as necessary.
 
 The recommended way of following the tutorials is to checkout the first step (the command is shown below), and then follow the tutorial by manually adding the code, but if you do get stuck you can use the tags to skip ahead. If you do get stuck, please let us know by [filing in issue in this repository](https://github.com/nasa/openmct-tutorial/issues/new) so that we can improve the tutorials.
 
+All source files that you create while following this tutorial should be created in the `openmct-tutorial` directory, unless otherwise specified.
+
 ## Part A: Running Open MCT
 **Shortcut**: `git checkout -f part-a`
 
@@ -109,6 +111,7 @@ function DictionaryPlugin() {
     }
 };
 ```
+Note that when the `install` function is invoked, the [Open MCT API will be provided as the first parameter](https://github.com/nasa/openmct/blob/master/API.md#defining-and-installing-a-new-plugin). In this simple case we don't use it, so it has been left out.
 
 Next, we'll update index.html to include the file:
 
