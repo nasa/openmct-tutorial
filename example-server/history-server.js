@@ -9,6 +9,7 @@ function HistoryServer(spacecraft) {
         var ids = req.params.pointId.split(',');
 
         var response = ids.reduce(function (resp, id) {
+            console.log(spacecraft.history[id]);
             return resp.concat(spacecraft.history[id].filter(function (p) {
                 return p.timestamp > start && p.timestamp < end;
             }));

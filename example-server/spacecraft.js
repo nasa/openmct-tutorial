@@ -1,54 +1,19 @@
 /*
  Spacecraft.js simulates a small spacecraft generating telemetry.
 */
+const ONE_ROW_OF_DATA = [1.111, 2.222, 3.3333];
 
 function Spacecraft() {
     this.state = {
-        "prop.fuel": 77,
-        "prop.thrusters": "OFF",
-        "comms.recd": 0,
-        "comms.sent": 0,
-        "pwr.temp": 245,
-        "pwr.c": 8.15,
-        "pwr.v": 30
     };
-    this.history = {};
     this.listeners = [];
-    Object.keys(this.state).forEach(function (k) {
-        this.history[k] = [];
-    }, this);
 
     setInterval(function () {
-        this.updateState();
         this.generateTelemetry();
     }.bind(this), 1000);
 
     console.log("Example spacecraft launched!");
     console.log("Press Enter to toggle thruster state.");
-
-    process.stdin.on('data', function () {
-        this.state['prop.thrusters'] =
-            (this.state['prop.thrusters'] === "OFF") ? "ON" : "OFF";
-        this.state['comms.recd'] += 32;
-        console.log("Thrusters " + this.state["prop.thrusters"]);
-        this.generateTelemetry();
-    }.bind(this));
-};
-
-Spacecraft.prototype.updateState = function () {
-    this.state["prop.fuel"] = Math.max(
-        0,
-        this.state["prop.fuel"] -
-            (this.state["prop.thrusters"] === "ON" ? 0.5 : 0)
-    );
-    this.state["pwr.temp"] = this.state["pwr.temp"] * 0.985
-        + Math.random() * 0.25 + Math.sin(Date.now());
-    if (this.state["prop.thrusters"] === "ON") {
-        this.state["pwr.c"] = 8.15;
-    } else {
-        this.state["pwr.c"] = this.state["pwr.c"] * 0.985;
-    }
-    this.state["pwr.v"] = 30 + Math.pow(Math.random(), 3);
 };
 
 /**
@@ -56,13 +21,13 @@ Spacecraft.prototype.updateState = function () {
  * listeners.
  */
 Spacecraft.prototype.generateTelemetry = function () {
-    var timestamp = Date.now(), sent = 0;
-    Object.keys(this.state).forEach(function (id) {
-        var state = { timestamp: timestamp, value: this.state[id], id: id};
-        this.notify(state);
-        this.history[id].push(state);
-        this.state["comms.sent"] += JSON.stringify(state).length;
-    }, this);
+    let timestamp = Date.now();
+    let datum = {
+        id: 'spectra',
+        timestamp: timestamp,
+        values: ONE_ROW_OF_DATA
+    };
+    this.notify(datum);
 };
 
 Spacecraft.prototype.notify = function (point) {
