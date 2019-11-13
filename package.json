@@ -20,7 +20,7 @@
   "dependencies": {
     "express": "^4.14.1",
     "express-ws": "^3.0.0",
-    "openmct": "nasa/openmct",
+    "openmct": "https://github.com/nasa/openmct.git",
     "ws": "^2.0.3"
   }
 }

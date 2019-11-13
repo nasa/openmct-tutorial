@@ -57,16 +57,15 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
     <title>Open MCT Tutorials</title>
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
+    <link rel="stylesheet" href="node_modules/openmct/dist/openmct.css">
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
         openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
 
         openmct.start();
     </script>
@@ -121,16 +120,15 @@ Next, we'll update index.html to include the file:
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
     <script src="dictionary-plugin.js"></script>
+    <link rel="stylesheet" href="node_modules/openmct/dist/openmct.css">
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
         openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());
 
@@ -451,16 +449,15 @@ With our adapter defined, we need to update `index.html` to include it.
     <script src="lib/http.js"></script>
     <script src="dictionary-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
+    <link rel="stylesheet" href="node_modules/openmct/dist/openmct.css">
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
         openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
@@ -531,16 +528,15 @@ With our realtime telemetry plugin defined, let's include it from `index.html`.
     <script src="dictionary-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
     <script src="realtime-telemetry-plugin.js"></script>
+    <link rel="stylesheet" href="node_modules/openmct/dist/openmct.css">
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
         openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
 
         openmct.install(DictionaryPlugin());
         openmct.install(HistoricalTelemetryPlugin());
