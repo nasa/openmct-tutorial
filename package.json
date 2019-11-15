@@ -19,7 +19,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
-    "openmct": "https://github.com/nasa/openmct.git#topic-core-refactor",
+    "openmct": "https://github.com/nasa/openmct.git",
     "ws": "^7.2.0"
   }
 }
