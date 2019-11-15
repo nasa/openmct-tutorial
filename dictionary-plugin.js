@@ -51,7 +51,7 @@ var compositionProvider = {
     }
 };
 
-function DictionaryPlugin() {
+var DictionaryPlugin = function (openmct) {
     return function install(openmct) {
         openmct.objects.addRoot({
             namespace: 'example.taxonomy',

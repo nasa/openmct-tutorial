@@ -44,6 +44,8 @@ Substituting the appropriate part and step numbers as necessary.
 
 The recommended way of following the tutorials is to checkout the first step (the command is shown below), and then follow the tutorial by manually adding the code, but if you do get stuck you can use the tags to skip ahead. If you do get stuck, please let us know by [filing in issue in this repository](https://github.com/nasa/openmct-tutorial/issues/new) so that we can improve the tutorials.
 
+All source files that you create while following this tutorial should be created in the `openmct-tutorial` directory, unless otherwise specified.
+
 ## Part A: Running Open MCT
 **Shortcut**: `git checkout -f part-a`
 
@@ -108,6 +110,7 @@ function DictionaryPlugin() {
     }
 };
 ```
+Note that when the `install` function is invoked, the [Open MCT API will be provided as the first parameter](https://github.com/nasa/openmct/blob/master/API.md#defining-and-installing-a-new-plugin). In this simple case we don't use it, so it has been left out.
 
 Next, we'll update index.html to include the file:
 
@@ -222,7 +225,7 @@ If we reload our browser now, the unknown object in our tree should be replaced 
 
 The root object uses the builtin type `folder`. For the objects representing the telemetry points for our spacecraft, we will now register a new object type.
 
-Snippet from [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-c/dictionary-plugin.js#L63-L67)
+Snippet from [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-c/dictionary-plugin.js)
 ```javascript
 openmct.types.addType('example.telemetry', {
     name: 'Example Telemetry Point',
@@ -291,7 +294,7 @@ Although we have now defined an Object Provider for both the "Example Spacecraft
 
 We have defined a root node in [Step 2](https://github.com/nasa/openmct-tutorial/blob/part-b-step-3/dictionary-plugin.js) and we have provided some objects that will appear in the tree. Now we will provide structure to the tree and define the relationships between objects in the tree. This is achieved with a __[Composition Provider](https://github.com/nasa/openmct/blob/master/API.md#composition-providers)__.
 
-Snippet from [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-c/dictionary-plugin.js#L34-L50)
+Snippet from [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-c/dictionary-plugin.js)
 ```javascript
 var compositionProvider = {
     appliesTo: function (domainObject) {
@@ -315,7 +318,7 @@ openmct.composition.addProvider(compositionProvider);
 ```
 A Composition Provider accepts a Domain Object, and provides identifiers for the children of that object. For the purposes of this tutorial we will return identifiers for the telemetry points available from our spacecraft. We build these from our spacecraft telemetry dictionary file.
 
-Our plugin should now look like this -
+Our plugin should now look like this:
 
 [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-c/dictionary-plugin.js)
 ```javascript
