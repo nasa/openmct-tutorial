@@ -2,7 +2,19 @@
 <html>
 <head>
     <title>Open MCT Tutorials</title>
+    <script src="node_modules/openmct/dist/openmct.js"></script>
+    <script src="lib/http.js"></script>
+    <link rel="stylesheet" href="node_modules/openmct/dist/openmct.css">
 </head>
 <body>
+<script>
+    openmct.install(openmct.plugins.LocalStorage());
+    openmct.install(openmct.plugins.MyItems());
+    openmct.install(openmct.plugins.UTCTimeSystem());
+    openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+    openmct.time.timeSystem('utc');
+
+    openmct.start();
+</script>
 </body>
 </html>
