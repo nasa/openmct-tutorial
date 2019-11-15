@@ -33,6 +33,24 @@ var objectProvider = {
     }
 };
 
+var compositionProvider = {
+    appliesTo: function (domainObject) {
+        return domainObject.identifier.namespace === 'example.taxonomy' &&
+               domainObject.type === 'folder';
+    },
+    load: function (domainObject) {
+        return getDictionary()
+            .then(function (dictionary) {
+                return dictionary.measurements.map(function (m) {
+                    return {
+                        namespace: 'example.taxonomy',
+                        key: m.key
+                    };
+                });
+            });
+    }
+};
+
 function DictionaryPlugin() {
     return function install(openmct) {
         openmct.objects.addRoot({
@@ -41,5 +59,13 @@ function DictionaryPlugin() {
         });
 
         openmct.objects.addProvider('example.taxonomy', objectProvider);
-    }
+
+        openmct.composition.addProvider(compositionProvider);
+
+        openmct.types.addType('example.telemetry', {
+            name: 'Example Telemetry Point',
+            description: 'Example telemetry point from our happy tutorial.',
+            cssClass: 'icon-telemetry'
+        });
+    };
 };
