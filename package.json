@@ -5,13 +5,13 @@
   "main": "example-server/server.js",
   "scripts": {
     "start": "node example-server/server.js",
-    "postinstall": "cd node_modules/openmct && npm install"
+    "clean": "rm -rf node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nasa/openmct-tutorial.git"
   },
-  "author": "",
+  "author": "National Aeronautics and Space Administration",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nasa/openmct-tutorial/issues"
@@ -20,7 +20,7 @@
   "dependencies": {
     "express": "^4.14.1",
     "express-ws": "^3.0.0",
-    "openmct": "nasa/openmct",
+    "openmct": "latest",
     "ws": "^2.0.3"
   }
 }
