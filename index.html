@@ -4,18 +4,20 @@
     <title>Open MCT Tutorials</title>
     <script src="node_modules/openmct/dist/openmct.js"></script>
     <script src="lib/http.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            openmct.setAssetPath('node_modules/openmct/dist');
+            openmct.install(openmct.plugins.LocalStorage());
+            openmct.install(openmct.plugins.MyItems());
+            openmct.install(openmct.plugins.UTCTimeSystem());
+            openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
+            openmct.time.timeSystem('utc');
+            openmct.install(openmct.plugins.Espresso());
+    
+            openmct.start();
+        });
+    </script>
 </head>
 <body>
-    <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
-        openmct.install(openmct.plugins.LocalStorage());
-        openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.UTCTimeSystem());
-        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
-        openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
-
-        openmct.start();
-    </script>
 </body>
 </html>
