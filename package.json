@@ -4,7 +4,8 @@
   "description": "Tutorials for Open MCT",
   "main": "example-server/server.js",
   "scripts": {
-    "start": "node example-server/server.js"
+    "start": "node example-server/server.js",
+    "clean": "rm -rf node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
