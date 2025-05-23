@@ -5,19 +5,19 @@ These tutorials will walk you through the simple process of integrating your tel
 ## Tutorial Prerequisites
 
 * [node.js](https://nodejs.org/en/)
-    * Mac OS: We recommend using [Homebrew](https://brew.sh/) to install node.
+  * Mac OS: We recommend using [Homebrew](https://brew.sh/) to install node.
     ```
     $ brew install node
     ```
-    * Windows: https://nodejs.org/en/download/
-    * linux: https://nodejs.org/en/download/
+  * Windows: https://nodejs.org/en/download/
+  * linux: https://nodejs.org/en/download/
 * [git](https://git-scm.com/)
-    * Mac OS: If XCode is installed, git is likely to already be available from your command line. If not, git can be installed using [Homebrew](https://brew.sh/).
+  * Mac OS: If XCode is installed, git is likely to already be available from your command line. If not, git can be installed using [Homebrew](https://brew.sh/).
     ```
     $ brew install git
     ```
-    * Windows: https://git-scm.com/downloads
-    * linux: https://git-scm.com/downloads
+  * Windows: https://git-scm.com/downloads
+  * linux: https://git-scm.com/downloads
 
 Neither git nor node.js are requirements for using Open MCT, however this tutorial assumes that both are installed. Also, command line familiarity is a plus, however the tutorial is written in such a way that it should be possible to copy-paste the steps verbatim into a POSIX command line.
 
@@ -57,46 +57,6 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
   <title>Open MCT Tutorials</title>
   <script src="node_modules/openmct/dist/openmct.js"></script>
   <script src="lib/http.js"></script>
-  <style>
-    @keyframes splash-spinner {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-
-    #splash-screen {
-      background-color: black;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 10000;
-    }
-
-    #splash-screen:before {
-      animation-name: splash-spinner;
-      animation-duration: 0.5s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      border-radius: 50%;
-      border-color: rgba(255, 255, 255, 0.25);
-      border-top-color: white;
-      border-style: solid;
-      border-width: 10px;
-      content: '';
-      display: block;
-      opacity: 0.25;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 100px;
-      width: 100px;
-    }
-  </style>
   <script>
     openmct.setAssetPath('node_modules/openmct/dist');
     openmct.install(openmct.plugins.LocalStorage());
@@ -118,7 +78,7 @@ We're going to define a single `index.html` page.  We'll include the Open MCT li
 </html>
 ```
 
-We have provided a basic server for the purpose of this tutorial, which will act as a web server as well as a telemetry source. This server is for demonstration purposes only. The Open MCT web client can be hosted on any http server. 
+We have provided a basic server for the purpose of this tutorial, which will act as a web server as well as a telemetry source. This server is for demonstration purposes only. The Open MCT web client can be hosted on any http server.
 
 If the server is not already running, run it now -
 
@@ -126,7 +86,7 @@ If the server is not already running, run it now -
 npm start
 ```
 
-If you open a web browser and navigate to http://localhost:8080/ you will see the Open MCT application running. Currently it is populated with one object named `My Items`. 
+If you open a web browser and navigate to http://localhost:8080/ you will see the Open MCT application running. Currently it is populated with one object named `My Items`.
 
 ![Open MCT](images/openmct-empty.png)
 
@@ -134,7 +94,7 @@ In this tutorial we will populate this tree with a number of objects representin
 
 # Part B - Populating the Object Tree
 ## Introduction
-In Open MCT everything is represented as a Domain Object, this includes sources of telemetry, telemetry points, and views for visualizing telemetry. Domain Objects are accessible from the object tree 
+In Open MCT everything is represented as a Domain Object, this includes sources of telemetry, telemetry points, and views for visualizing telemetry. Domain Objects are accessible from the object tree
 
 ![Domain Objects are accessible from the object tree](images/object-tree.png)
 
@@ -165,46 +125,6 @@ Next, we'll update index.html to include the file and install the plugin:
   <script src="node_modules/openmct/dist/openmct.js"></script>
   <script src="lib/http.js"></script>
   <script src="dictionary-plugin.js"></script>
-  <style>
-    @keyframes splash-spinner {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-
-    #splash-screen {
-      background-color: black;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 10000;
-    }
-
-    #splash-screen:before {
-      animation-name: splash-spinner;
-      animation-duration: 0.5s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      border-radius: 50%;
-      border-color: rgba(255, 255, 255, 0.25);
-      border-top-color: white;
-      border-style: solid;
-      border-width: 10px;
-      content: '';
-      display: block;
-      opacity: 0.25;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 100px;
-      width: 100px;
-    }
-  </style>
   <script>
     openmct.setAssetPath('node_modules/openmct/dist');
     openmct.install(openmct.plugins.LocalStorage());
@@ -226,10 +146,9 @@ Next, we'll update index.html to include the file and install the plugin:
     <div id="app"></div>
 </body>
 </html>
-
 ```
 
-If we reload the browser now, and open a javascript console, we should see the following message 
+If we reload the browser now, and open a javascript console, we should see the following message
 
 ```
 I've been installed.
@@ -244,7 +163,7 @@ In summary, an Open MCT plugin is very simple: it's an initialization function w
 ## Step 2 - Creating a new root node
 **Shortcut:** `git checkout -f part-b-step-2`
 
-To be able to access our spacecraft objects from the tree, we first need to define a root. We will use the Open MCT API to define a new root object representing our spacecraft. 
+To be able to access our spacecraft objects from the tree, we first need to define a root. We will use the Open MCT API to define a new root object representing our spacecraft.
 
 [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-b-step-3/dictionary-plugin.js)
 ```javascript
@@ -261,9 +180,9 @@ function DictionaryPlugin() {
 A new root is added to the object tree using the `addRoot` function exposed by the Open MCT API. `addRoot` accepts an object identifier - defined as a javascript object with a `namespace` and a `key` attribute. [More information on objects and identifiers](https://github.com/nasa/openmct/blob/master/API.md#domain-objects-and-identifiers) is available in our API.
 
 If we reload the browser now, we should see a new object in the tree.
- 
- ![Open MCT](images/openmct-missing-root.png)
- 
+
+![Open MCT](images/openmct-missing-root.png)
+
 Currently it will appear as a question mark with `Missing: example.taxonomy:spacecraft` next to it. This is because for now all we've done is provide an identifier for the root node. In the next step, we will define an __Object Provider__, which will provide Open MCT with an object for this identifier. A [basic overview of object providers](https://github.com/nasa/openmct/blob/master/API.md#object-providers) is available in our API documentation.
 
 ## Step 3 - Providing objects
@@ -307,7 +226,7 @@ function DictionaryPlugin() {
 };
 ```
 
-If we reload our browser now, the unknown object in our tree should be replaced with an object named "Example Spacecraft" with a folder icon. 
+If we reload our browser now, the unknown object in our tree should be replaced with an object named "Example Spacecraft" with a folder icon.
 
 ![Open MCT with new Spacecraft root](images/openmct-root-folder.png)
 
@@ -323,7 +242,7 @@ openmct.types.addType('example.telemetry', {
 ```
 
 Here we define a new type with a key of `example.telemetry`. For details on the attributes used to specify a new Type, please [see our documentation on object Types](https://github.com/nasa/openmct/blob/master/API.md#domain-object-types)
- 
+
 Finally, let's modify our object provider to return objects of our newly registered type. Our dictionary plugin will now look like this:
 
 [dictionary-plugin.js](https://github.com/nasa/openmct-tutorial/blob/part-b-step-4/dictionary-plugin.js)
@@ -371,6 +290,12 @@ function DictionaryPlugin() {
         });
         
         openmct.objects.addProvider('example.taxonomy', objectProvider);
+
+      openmct.types.addType('example.telemetry', {
+        name: 'Example Telemetry Point',
+        description: 'Example telemetry point from our happy tutorial.',
+        cssClass: 'icon-telemetry'
+      });
     }
 };
 ```
@@ -483,11 +408,11 @@ function DictionaryPlugin() {
 };
 ```
 
-At this point, if we reload the page we should see a fully populated object tree. 
+At this point, if we reload the page we should see a fully populated object tree.
 
 ![Open MCT with spacecraft telemetry objects](images/telemetry-objects.png)
 
-Clicking on our telemetry points will display views of those objects, but for now we don't have any telemetry for them. The tutorial telemetry server will provide telemetry for these points, and in the following steps we will define some telemetry adapters to retrieve telemetry data from the server, and provide it to Open MCT. 
+Clicking on our telemetry points will display views of those objects, but for now we don't have any telemetry for them. The tutorial telemetry server will provide telemetry for these points, and in the following steps we will define some telemetry adapters to retrieve telemetry data from the server, and provide it to Open MCT.
 
 # Part C - Integrate/Provide/Request Telemetry
 **Shortcut:** `git checkout -f part-c`
@@ -565,7 +490,7 @@ At this point If we refresh the page we should now see some telemetry for our te
 # Part D - Subscribing to New Telemetry
 **Shortcut:** `git checkout -f part-d`
 
-We are now going to define a telemetry adapter that allows Open MCT to subscribe to our tutorial server for new telemetry as it becomes available. The process of defining a telemetry adapter for subscribing to real-time telemetry is similar to our previously defined historical telemetry adapter, except that we define a `supportsSubscribe` function to indicate that this adapter provides telemetry subscriptions, and a `subscribe` function for subscribing to updates. This adapter uses a simple messaging system for subscribing to telemetry updates over a websocket. 
+We are now going to define a telemetry adapter that allows Open MCT to subscribe to our tutorial server for new telemetry as it becomes available. The process of defining a telemetry adapter for subscribing to real-time telemetry is similar to our previously defined historical telemetry adapter, except that we define a `supportsSubscribe` function to indicate that this adapter provides telemetry subscriptions, and a `subscribe` function for subscribing to updates. This adapter uses a simple messaging system for subscribing to telemetry updates over a websocket.
 
 Let's define our new plugin in a file named `realtime-telemetry-plugin.js`.
 
