@@ -5,7 +5,7 @@
   "main": "example-server/server.js",
   "scripts": {
     "start": "node example-server/server.js",
-    "postinstall": "cd node_modules/openmct && npm install"
+    "clean": "rm -rf node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/nasa/openmct-tutorial#readme",
   "dependencies": {
-    "express": "^4.14.1",
-    "express-ws": "^3.0.0",
-    "openmct": "nasa/openmct",
-    "ws": "^2.0.3"
+    "express": "^4.19.2",
+    "express-ws": "^4.0.0",
+    "openmct": "latest",
+    "ws": "^6.1.2"
   }
 }
