@@ -550,23 +550,27 @@ With our realtime telemetry plugin defined, let's include it from `index.html`.
     <script src="dictionary-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
     <script src="realtime-telemetry-plugin.js"></script>
+    <script>
+      openmct.setAssetPath('node_modules/openmct/dist');
+      openmct.install(openmct.plugins.LocalStorage());
+      openmct.install(openmct.plugins.MyItems());
+      openmct.install(openmct.plugins.UTCTimeSystem());
+      openmct.time.setClock('local');
+      openmct.time.setClockOffsets({start: -15 * 60 * 1000, end: 0});
+      openmct.time.setTimeSystem('utc');
+      openmct.install(openmct.plugins.Espresso());
+  
+      openmct.install(DictionaryPlugin());
+      openmct.install(HistoricalTelemetryPlugin());
+      openmct.install(RealtimeTelemetryPlugin());
+
+      document.addEventListener('DOMContentLoaded', () => {
+        openmct.start();
+      });
+    </script>
 </head>
 <body>
-    <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
-        openmct.install(openmct.plugins.LocalStorage());
-        openmct.install(openmct.plugins.MyItems());
-        openmct.install(openmct.plugins.UTCTimeSystem());
-        openmct.time.clock('local', {start: -15 * 60 * 1000, end: 0});
-        openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
-
-        openmct.install(DictionaryPlugin());
-        openmct.install(HistoricalTelemetryPlugin());
-        openmct.install(RealtimeTelemetryPlugin());
-
-        openmct.start();
-    </script>
+<div id="app"></div>
 </body>
 </html>
 ```
