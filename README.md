@@ -20,7 +20,7 @@ These tutorials will walk you through the simple process of integrating your tel
   * linux: https://git-scm.com/downloads
 
 Neither git nor node.js are requirements for using Open MCT, however this tutorial assumes that both are installed. Also, command line familiarity is a plus, however the tutorial is written in such a way that it should be possible to copy-paste the steps verbatim into a POSIX command line.
-
+The version of node to use can be found by inspecting the `engines` section of Open MCT here: https://www.npmjs.com/package/openmct?activeTab=code
 ## Installing the tutorials
 
 ```
